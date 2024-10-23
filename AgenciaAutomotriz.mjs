@@ -1,6 +1,7 @@
-import Auto from "./auto";
+import Auto from "./auto.mjs";
+import Cliente from "./cliente.mjs";
 
-class Concessionaria {
+export default class Concessionaria {
   constructor(nombre = "") {
     this.nombre = nombre;
     this.autos = [];
@@ -11,13 +12,18 @@ class Concessionaria {
     this.devoluciones = [];
   }
   crearAuto(auto) {
-    const nuevoAuto = new Auto(auto)
-    this.autos.push(nuevoAuto)
- }
+    const nuevoAuto = new Auto(auto);
+    this.autos.push(nuevoAuto);
+  }
+  
+  
+  }
+  /*
   agregarCliente(cliente) {
-    const nuevoCliente = new Cliente(cliente)
+    const nuevoCliente = new Cliente(cliente);
     this.clientes.push(nuevoCliente);
   }
+  
   agregarVendedor(vendedor) {
     this.vendedores.push(vendedor);
   }
@@ -28,15 +34,15 @@ class Concessionaria {
     this.devoluciones.push(devolucion);
   }
   obtenarInventario() {
-    return  this.autos
-    }
+    return this.autos;
+  }
   obtenerVentas() {
-     return this.ventas
+    return this.ventas;
   }
   obtenerDevoluciones() {
-    return this.devoluciones
-  }
-  }
+    return this.devoluciones;
+  }*/
+
 /*
 1.- Quitar nombre de class a los archivos =listo
 2.- Añadir operaciones CRUD a las propiedades guardadas en la clase main
