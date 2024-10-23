@@ -1,7 +1,8 @@
 import Auto from "./auto.mjs";
 import Cliente from "./cliente.mjs";
+import Vendedor from "./Vendedor.mjs";
 
-export default class Concessionaria {
+export default class Concesionaria {
   constructor(nombre = "") {
     this.nombre = nombre;
     this.autos = [];
@@ -11,21 +12,21 @@ export default class Concessionaria {
     this.ventas = [];
     this.devoluciones = [];
   }
+  //create
   crearAuto(auto) {
     const nuevoAuto = new Auto(auto);
     this.autos.push(nuevoAuto);
   }
-  
-  
-  }
-  /*
+
+  //create
   agregarCliente(cliente) {
     const nuevoCliente = new Cliente(cliente);
     this.clientes.push(nuevoCliente);
   }
-  
+  //create
   agregarVendedor(vendedor) {
-    this.vendedores.push(vendedor);
+    const vendedorNuevo = new Vendedor(vendedor)
+    this.vendedores.push(vendedorNuevo);
   }
   registrarVenta(venta) {
     this.ventas.push(venta);
@@ -41,7 +42,14 @@ export default class Concessionaria {
   }
   obtenerDevoluciones() {
     return this.devoluciones;
-  }*/
+  }
+
+  obtenerAutoPorMarca(marca) {
+    
+  }
+  
+  
+  }
 
 /*
 1.- Quitar nombre de class a los archivos =listo
