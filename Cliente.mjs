@@ -1,7 +1,7 @@
 export default class Cliente {
-  constructor({ nombre = ""}) {
+  constructor({ nombre = "",edad = 0}) {
     this.nombre = nombre;
-    this.edad = 0;
+    this.edad = edad;
     this.historialDeCompras = [];
   }
   comprarAuto() {}

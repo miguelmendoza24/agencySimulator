@@ -1,25 +1,36 @@
 import Concesionaria from "./agenciaAutomotriz.mjs";
-import Auto from "./auto.mjs";
-import Cliente from "./cliente.mjs";
-import Vendedor from "./Vendedor.mjs";
 
+const laConcesionaria = new Concesionaria("Los evomind");
 
+laConcesionaria.crearAuto({ marca: "toyota", modelo: "erizo", año: 2024, precio: 30300 });
 
+laConcesionaria.crearAuto({
+  marca: "mazda",
+  modelo: "el chulo",
+  año: 2023,
+  precio: 29000,
+});
 
+laConcesionaria.crearAuto({
+  marca: "toyota",
+  modelo: "Rayo",
+  año: 2025,
+  precio: 32000,
+});
 
-const laConcesionaria = new Concesionaria("Concesionaria");
-const miAuto = new Auto({ marca: "Toyota", modelo: "Cor", año: 2021, precio: 200000 });
+laConcesionaria.agregarCliente({ nombre: "arcinicuiteco", edad: 25});
 
-const nuevoCliente = new Cliente({ nombre: "sinforiano", edad: 35 });
+laConcesionaria.agregarVendedor({ nombre: "serafin" })
+const autosDisponibles = laConcesionaria.obtenerAutos();
 
-const vendedor = new Vendedor({ nombre:"miguel"})
+const autosToyota = laConcesionaria.obtenerAutoPorMarca("toyota");
 
-laConcesionaria.crearAuto(miAuto);
-console.log(nuevoCliente);
-
-laConcesionaria.agregarCliente(nuevoCliente)
-laConcesionaria.agregarVendedor(vendedor)
+console.log(autosToyota);
+console.log("----aqui ternina-----");
+console.log(autosDisponibles);
+console.log("----aqui ternina----");
 console.log(laConcesionaria);
+console.log("----aqui ternina------");
 
 
 
