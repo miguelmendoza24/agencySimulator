@@ -1,14 +1,16 @@
 export default class Cliente {
-  constructor({ nombre = "",edad = 0}) {
+  constructor({ nombre = "", edad = 0 }) {
     this.nombre = nombre;
     this.edad = edad;
     this.historialDeCompras = [];
   }
-  comprarAuto() {}
-  
-  devolverAuto() {
-  }
-  mostrarHistorial() {
 
+  actualizar(nuevosDatos) {
+    Object.assign(this, nuevosDatos);
   }
+  
+  comprarAuto() {}
+
+  devolverAuto() {}
+  mostrarHistorial() {}
 }

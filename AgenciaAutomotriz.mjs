@@ -17,12 +17,6 @@ export default class Concesionaria {
     const nuevoAuto = new Auto(auto);
     this.autos.push(nuevoAuto);
   }
-
-  //create
-  agregarCliente(cliente) {
-    const nuevoCliente = new Cliente(cliente);
-    this.clientes.push(nuevoCliente);
-  }
   //leer
   obtenerAutos() {
     return this.autos;
@@ -32,12 +26,85 @@ export default class Concesionaria {
     const autosPorMarca = this.autos.filter((auto) => auto.marca === marca);
     return autosPorMarca;
   }
+  //actualizar
+  actualizarAuto(index, nuevosDatos) {
+    this.autos[index].actualizar(nuevosDatos);
+  }
+
+  //actualizar
+  actualizarAutoPorModelo(modelo, nuevosDatos) {
+    const autos = this.autos.filter((auto) => auto.modelo === modelo);
+    if (autos.length > 0) {
+      autos.forEach((auto) => auto.actualizar(nuevosDatos));
+    }
+  }
+  //borrar
+  eliminarAutoPorIndice(index) {
+    if (index >= 0 && index < this.autos.length) {
+      this.autos.splice(index, 1);
+    }
+  }
+
+  //clase cliente crud
+
+  //create
+  agregarCliente(cliente) {
+    const nuevoCliente = new Cliente(cliente);
+    this.clientes.push(nuevoCliente);
+  }
+  //leer
+  obtenerClientes() {
+    return this.clientes;
+  }
+
+  //leer
+  obtenerClientePorNombre(nombre) {
+    return this.clientes.find((cliente) => cliente.nombre === nombre);
+  }
+  //actualizar
+  actualizarCliente(index, nuevosDatos) {
+    this.clientes[index].actualizar(nuevosDatos);
+  }
+  //eliminar
+  eliminarClientePorIndice(indice) {
+    if (indice >= 0 && indice < this.clientes.length) {
+      this.clientes.splice(indice, 1);
+    }
+  }
+
+  // clase vendedor crud
 
   //create
   agregarVendedor(vendedor) {
     const vendedorNuevo = new Vendedor(vendedor);
     this.vendedores.push(vendedorNuevo);
   }
+
+  //leer
+  obtenerVendedores() {
+    return this.vendedores
+  }
+
+  //leer
+  obtenerVendedoresPorNombre(nombre) {
+    const vendedorPorNombre = this.vendedores.filter((vendedor) => vendedor.nombre === nombre)
+    return vendedorPorNombre
+  }
+  //actualizar
+  actualizarVendedor(index, nuevosDatos) {
+    this.vendedores[index].actualizar(nuevosDatos)
+  }
+
+//eliminar
+  eliminarVendedor(index) {
+    if (index >= 0 && this.vendedores.length) {
+      this.vendedores.splice(index, 1)
+    }
+  }
+
+
+  //clase venta crud
+
   registrarVenta(venta) {
     this.ventas.push(venta);
   }

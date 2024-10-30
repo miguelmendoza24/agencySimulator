@@ -6,6 +6,11 @@ export default class Auto {
     this.precio = precio
     this.disponible = true;
   }
+
+    actualizar(nuevosDatos) {
+    Object.assign(this, nuevosDatos);
+}
+
   vender() {
   }
   devolver() {
