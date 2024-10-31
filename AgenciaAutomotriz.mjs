@@ -22,27 +22,21 @@ export default class Concesionaria {
     return this.autos;
   }
   //leer
-  obtenerAutoPorMarca(marca) {
-    const autosPorMarca = this.autos.filter((auto) => auto.marca === marca);
-    return autosPorMarca;
-  }
-  //actualizar
-  actualizarAuto(index, nuevosDatos) {
-    this.autos[index].actualizar(nuevosDatos);
+  buscarAuto(propiedad, valor) {
+    return this.autos.find((auto) => auto[propiedad] === valor);
   }
 
   //actualizar
-  actualizarAutoPorModelo(modelo, nuevosDatos) {
-    const autos = this.autos.filter((auto) => auto.modelo === modelo);
-    if (autos.length > 0) {
-      autos.forEach((auto) => auto.actualizar(nuevosDatos));
+  actualizarAuto(propiedad, valor, nuevosDatos) {
+    const auto = this.autos.find((auto) => auto[propiedad] === valor);
+    if (auto) {
+      auto.actualizar(nuevosDatos);
     }
   }
+
   //borrar
-  eliminarAutoPorIndice(index) {
-    if (index >= 0 && index < this.autos.length) {
-      this.autos.splice(index, 1);
-    }
+  eliminarAuto(propiedad, valor) {
+    this.autos = this.autos.filter((auto) => auto[propiedad] !== valor);
   }
 
   //clase cliente crud
@@ -56,20 +50,24 @@ export default class Concesionaria {
   obtenerClientes() {
     return this.clientes;
   }
-
   //leer
-  obtenerClientePorNombre(nombre) {
-    return this.clientes.find((cliente) => cliente.nombre === nombre);
+  buscarCliente(propiedad, valor) {
+    return this.clientes.find((cliente) => cliente[propiedad] === valor);
   }
   //actualizar
-  actualizarCliente(index, nuevosDatos) {
-    this.clientes[index].actualizar(nuevosDatos);
+  actualizarCliente(propiedad, valor, nuevosDatos) {
+    const cliente = this.clientes.find(
+      (cliente) => cliente[propiedad] === valor
+    );
+    if (cliente) {
+      cliente.actualizar(nuevosDatos);
+    }
   }
   //eliminar
-  eliminarClientePorIndice(indice) {
-    if (indice >= 0 && indice < this.clientes.length) {
-      this.clientes.splice(indice, 1);
-    }
+  eliminarCliente(propiedad, valor) {
+    this.clientes = this.clientes.filter(
+      (cliente) => cliente[propiedad] !== valor
+    );
   }
 
   // clase vendedor crud
@@ -82,26 +80,24 @@ export default class Concesionaria {
 
   //leer
   obtenerVendedores() {
-    return this.vendedores
+    return this.vendedores;
   }
 
   //leer
-  obtenerVendedoresPorNombre(nombre) {
-    const vendedorPorNombre = this.vendedores.filter((vendedor) => vendedor.nombre === nombre)
-    return vendedorPorNombre
+  buscarVendedor(propiedad, valor) {
+    return this.vendedores.find((vendedor) => vendedor[propiedad] === valor);
   }
   //actualizar
   actualizarVendedor(index, nuevosDatos) {
-    this.vendedores[index].actualizar(nuevosDatos)
+    this.vendedores[index].actualizar(nuevosDatos);
   }
 
-//eliminar
-  eliminarVendedor(index) {
-    if (index >= 0 && this.vendedores.length) {
-      this.vendedores.splice(index, 1)
-    }
+  //eliminar
+  eliminarVendedor(propiedad, valor) {
+    this.vendedores = this.vendedores.filter(
+      (vendedor) => vendedor[propiedad] !== valor
+    );
   }
-
 
   //clase venta crud
 
