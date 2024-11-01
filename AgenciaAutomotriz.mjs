@@ -3,6 +3,7 @@ import Cliente from "./Cliente.mjs";
 import Vendedor from "./Vendedor.mjs";
 import Venta from "./Venta.mjs";
 import Devolucion from "./Devolucion.mjs";
+import Administrador from "./Administrador.mjs";
 
 export default class Concesionaria {
   constructor(nombre = "") {
@@ -14,6 +15,7 @@ export default class Concesionaria {
     this.ventas = [];
     this.devoluciones = [];
   }
+  //clase auto crud
   //create
   crearAuto(auto) {
     const nuevoAuto = new Auto(auto);
@@ -91,9 +93,11 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarVendedor(propiedad, valor, nuevosDatos) {
-    const vendedor = this.vendedores.find((vendedor) => vendedor[propiedad] === valor);
-    if(vendedor){ 
-    vendedor.actualizar(nuevosDatos);
+    const vendedor = this.vendedores.find(
+      (vendedor) => vendedor[propiedad] === valor
+    );
+    if (vendedor) {
+      vendedor.actualizar(nuevosDatos);
     }
   }
   //eliminar
@@ -103,8 +107,9 @@ export default class Concesionaria {
     );
   }
   //clase venta crud
+  //create
   registrarVenta(venta) {
-    const nuevaVenta = new Venta(venta)
+    const nuevaVenta = new Venta(venta);
     this.ventas.push(nuevaVenta);
   }
 
@@ -115,58 +120,81 @@ export default class Concesionaria {
 
   //leer
   buscarVenta(propiedad, valor) {
-    return this.ventas.find((venta) => venta[propiedad] === valor)
+    return this.ventas.find((venta) => venta[propiedad] === valor);
   }
-    //actualizar
+  //actualizar
   actualizarVenta(propiedad, valor, nuevosDatos) {
-    const venta = this.ventas.find((venta) => venta[propiedad] === valor)
+    const venta = this.ventas.find((venta) => venta[propiedad] === valor);
     if (venta) {
-      venta.actualizar(nuevosDatos)
+      venta.actualizar(nuevosDatos);
     }
   }
-    //eliminar
+  //eliminar
   eliminarVenta(propiedad, valor) {
-    this.ventas = this.ventas.filter((venta) => venta[propiedad] !== valor)
+    this.ventas = this.ventas.filter((venta) => venta[propiedad] !== valor);
   }
 
-
-    //clase devoluciones CRUD
-  
+  //clase devoluciones CRUD
+  //create
   registrarDevolucion(devolucion) {
-    const nuevaDevolucion = new Devolucion(devolucion)
+    const nuevaDevolucion = new Devolucion(devolucion);
     this.devoluciones.push(nuevaDevolucion);
   }
-  
+  //leer
   obtenerDevoluciones() {
     return this.devoluciones;
   }
-
+  //leer
   buscarDevolucion(propiedad, valor) {
     return this.ventas.find((devolucion) => devolucion[propiedad] === valor);
   }
-
+  //actualizar
   actualizarDevolucion(propiedad, valor, nuevosDatos) {
-    const devolucion = this.ventas.find((devolucion) => devolucion[propiedad] === valor);
+    const devolucion = this.ventas.find(
+      (devolucion) => devolucion[propiedad] === valor
+    );
     if (devolucion) {
       devolucion.actualizar(nuevosDatos);
     }
   }
-
+  //eliminar
   eliminarDevolucion(propiedad, valor) {
-    this.devoluciones = this.devoluciones.filter((devolucion) => devolucion[propiedad] !== valor);
-
+    this.devoluciones = this.devoluciones.filter(
+      (devolucion) => devolucion[propiedad] !== valor
+    );
   }
 
-
-
-
-
-
-
-
-
-
-
+  //clase administrador crud
+  //create
+  crearAdministrador(administrador) {
+    const nuevoAdministrador = new Administrador(administrador);
+    this.administradores.push(nuevoAdministrador);
+  }
+  //leer
+  obenerAdministradores() {
+    return this.administradores;
+  }
+  //leer
+  buscarAdministrador(propiedad, valor) {
+    return this.administradores.find(
+      (administrador) => administrador[propiedad] === valor
+    );
+  }
+  //actualizar
+  actualizarAsministrador(propiedad, valor, nuevosDatos) {
+    const administrador = this.administradores.find(
+      (administrador) => administrador[propiedad] === valor
+    );
+    if (administrador) {
+      administrador.actualizar(nuevosDatos);
+    }
+  }
+  //eliminar
+  eliminarAdministrador(propiedad, valor) {
+    this.administradores = this.administradores.filter(
+      (administrador) => administrador[propiedad] !== valor
+    );
+  }
 }
 
 /*
