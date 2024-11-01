@@ -8,9 +8,4 @@ export default class Cliente {
   actualizar(nuevosDatos) {
     Object.assign(this, nuevosDatos);
   }
-  
-  comprarAuto() {}
-
-  devolverAuto() {}
-  mostrarHistorial() {}
 }
