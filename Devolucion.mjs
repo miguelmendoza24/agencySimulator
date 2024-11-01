@@ -1,8 +1,9 @@
 export default class Devolucion {
-  constructor(cliente = "") {
+  constructor({ cliente = "", auto = "", fecha = "",motivo =""}) {
     this.cliente = cliente;
     this.auto = auto;
     this.fecha = fecha;
+    this.motivo = motivo;
   }
 
   actualizar(nuevosDatos) {

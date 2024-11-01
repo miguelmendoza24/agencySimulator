@@ -1,9 +1,9 @@
 export default class Venta {
-  constructor(cliente = "") {
+  constructor({ auto = "", cliente = "", vendedor = "", precio = ""}) {
     this.auto = auto;
     this.cliente = cliente;
     this.vendedor = vendedor;
-    this.fecha = fecha;
+    this.precio = precio
   }
   actualizar(nuevosDatos) {
     Object.assign(this, nuevosDatos);

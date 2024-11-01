@@ -146,11 +146,11 @@ export default class Concesionaria {
   }
   //leer
   buscarDevolucion(propiedad, valor) {
-    return this.ventas.find((devolucion) => devolucion[propiedad] === valor);
+    return this.devoluciones.find((devolucion) => devolucion[propiedad] === valor);
   }
   //actualizar
   actualizarDevolucion(propiedad, valor, nuevosDatos) {
-    const devolucion = this.ventas.find(
+    const devolucion = this.devoluciones.find(
       (devolucion) => devolucion[propiedad] === valor
     );
     if (devolucion) {
@@ -166,12 +166,12 @@ export default class Concesionaria {
 
   //clase administrador crud
   //create
-  crearAdministrador(administrador) {
-    const nuevoAdministrador = new Administrador(administrador);
+  crearAdministrador(nombre) {
+    const nuevoAdministrador = new Administrador(nombre);
     this.administradores.push(nuevoAdministrador);
   }
   //leer
-  obenerAdministradores() {
+  obtenerAdministradores() {
     return this.administradores;
   }
   //leer
@@ -181,7 +181,7 @@ export default class Concesionaria {
     );
   }
   //actualizar
-  actualizarAsministrador(propiedad, valor, nuevosDatos) {
+  actualizarAdministrador(propiedad, valor, nuevosDatos) {
     const administrador = this.administradores.find(
       (administrador) => administrador[propiedad] === valor
     );
@@ -199,7 +199,7 @@ export default class Concesionaria {
 
 /*
 1.- Quitar nombre de class a los archivos =listo
-2.- Añadir operaciones CRUD a las propiedades guardadas en la clase main
+2.- Añadir operaciones CRUD a las propiedades guardadas en la clase main = listo
 3.- Crear un script donde se implemente la clase main (usar imports/exports) y al menos se prueben los métodos 
 4.- Hacer un módulo para ejecutar y mostrar datos en consola, de tal manera que sea interactivo con el usuario
 5.- Hacer un servicio que controle a las clases y los datos
