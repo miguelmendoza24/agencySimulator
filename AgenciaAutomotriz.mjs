@@ -32,7 +32,7 @@ export default class Concesionaria {
 
   //actualizar
   actualizarAuto(propiedad, valor, nuevosDatos) {
-    const auto = this.autos.find((auto) => auto[propiedad] === valor);
+    const auto = this.buscarAuto(propiedad, valor)
     if (auto) {
       auto.actualizar(nuevosDatos);
     }
@@ -60,9 +60,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarCliente(propiedad, valor, nuevosDatos) {
-    const cliente = this.clientes.find(
-      (cliente) => cliente[propiedad] === valor
-    );
+    const cliente = this.buscarCliente(propiedad, valor)
     if (cliente) {
       cliente.actualizar(nuevosDatos);
     }
@@ -93,9 +91,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarVendedor(propiedad, valor, nuevosDatos) {
-    const vendedor = this.vendedores.find(
-      (vendedor) => vendedor[propiedad] === valor
-    );
+    const vendedor = this.buscarVendedor(propiedad, valor)
     if (vendedor) {
       vendedor.actualizar(nuevosDatos);
     }
@@ -124,7 +120,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarVenta(propiedad, valor, nuevosDatos) {
-    const venta = this.ventas.find((venta) => venta[propiedad] === valor);
+    const venta = this.buscarVenta(propiedad, valor)
     if (venta) {
       venta.actualizar(nuevosDatos);
     }
@@ -150,9 +146,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarDevolucion(propiedad, valor, nuevosDatos) {
-    const devolucion = this.devoluciones.find(
-      (devolucion) => devolucion[propiedad] === valor
-    );
+    const devolucion = this.buscarDevolucion(propiedad, valor);
     if (devolucion) {
       devolucion.actualizar(nuevosDatos);
     }
@@ -182,9 +176,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarAdministrador(propiedad, valor, nuevosDatos) {
-    const administrador = this.administradores.find(
-      (administrador) => administrador[propiedad] === valor
-    );
+    const administrador = this.buscarAdministrador(propiedad, valor)
     if (administrador) {
       administrador.actualizar(nuevosDatos);
     }
