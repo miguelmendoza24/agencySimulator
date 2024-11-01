@@ -1,6 +1,7 @@
 import Auto from "./Auto.mjs";
 import Cliente from "./Cliente.mjs";
 import Vendedor from "./Vendedor.mjs";
+import Venta from "./Venta.mjs";
 
 export default class Concesionaria {
   constructor(nombre = "") {
@@ -88,31 +89,52 @@ export default class Concesionaria {
     return this.vendedores.find((vendedor) => vendedor[propiedad] === valor);
   }
   //actualizar
-  actualizarVendedor(index, nuevosDatos) {
-    this.vendedores[index].actualizar(nuevosDatos);
+  actualizarVendedor(propiedad, valor, nuevosDatos) {
+    const vendedor = this.vendedores.find((vendedor) => vendedor[propiedad] === valor);
+    if(vendedor){ 
+    vendedor.actualizar(nuevosDatos);
+    }
   }
-
   //eliminar
   eliminarVendedor(propiedad, valor) {
     this.vendedores = this.vendedores.filter(
       (vendedor) => vendedor[propiedad] !== valor
     );
   }
-
   //clase venta crud
-
   registrarVenta(venta) {
-    this.ventas.push(venta);
+    const nuevaVenta = new Venta(venta)
+    this.ventas.push(nuevaVenta);
   }
-  registrarDevolucion(devolucion) {
-    this.devoluciones.push(devolucion);
-  }
-  obtenarInventario() {
-    return this.autos;
-  }
+
+  //leer
   obtenerVentas() {
     return this.ventas;
   }
+
+  //leer
+  buscarVenta(propiedad, valor) {
+    return this.ventas.find((venta) => venta[propiedad] === valor)
+  }
+    //actualizar
+  actualizarVenta(propiedad, valor, nuevosDatos) {
+    const venta = this.ventas.find((venta) => venta[propiedad] === valor)
+    if (venta) {
+      venta.actualizar(nuevosDatos)
+    }
+  }
+    //eliminar
+  eliminarVenta(propiedad, valor) {
+    this.ventas = this.ventas.filter((venta) => venta[propiedad] !== valor)
+  }
+
+
+    //clase devoluciones CRUD
+  
+  registrarDevolucion(devolucion) {
+    this.devoluciones.push(devolucion);
+  }
+  
   obtenerDevoluciones() {
     return this.devoluciones;
   }
