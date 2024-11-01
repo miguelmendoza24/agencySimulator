@@ -3,18 +3,11 @@ export default class Auto {
     this.marca = marca;
     this.modelo = modelo;
     this.año = año;
-    this.precio = precio
+    this.precio = precio;
     this.disponible = true;
   }
 
-    actualizar(nuevosDatos) {
+  actualizar(nuevosDatos) {
     Object.assign(this, nuevosDatos);
-}
-
-  vender() {
-  }
-  devolver() {
-  }
-  mostrarInfo() {
   }
 }
