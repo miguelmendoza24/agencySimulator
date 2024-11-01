@@ -2,6 +2,7 @@ import Auto from "./Auto.mjs";
 import Cliente from "./Cliente.mjs";
 import Vendedor from "./Vendedor.mjs";
 import Venta from "./Venta.mjs";
+import Devolucion from "./Devolucion.mjs";
 
 export default class Concesionaria {
   constructor(nombre = "") {
@@ -132,12 +133,40 @@ export default class Concesionaria {
     //clase devoluciones CRUD
   
   registrarDevolucion(devolucion) {
-    this.devoluciones.push(devolucion);
+    const nuevaDevolucion = new Devolucion(devolucion)
+    this.devoluciones.push(nuevaDevolucion);
   }
   
   obtenerDevoluciones() {
     return this.devoluciones;
   }
+
+  buscarDevolucion(propiedad, valor) {
+    return this.ventas.find((devolucion) => devolucion[propiedad] === valor);
+  }
+
+  actualizarDevolucion(propiedad, valor, nuevosDatos) {
+    const devolucion = this.ventas.find((devolucion) => devolucion[propiedad] === valor);
+    if (devolucion) {
+      devolucion.actualizar(nuevosDatos);
+    }
+  }
+
+  eliminarDevolucion(propiedad, valor) {
+    this.devoluciones = this.devoluciones.filter((devolucion) => devolucion[propiedad] !== valor);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 /*
