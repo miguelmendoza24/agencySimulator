@@ -17,69 +17,135 @@ laConcesionaria.crearAuto({
 });
 
 laConcesionaria.crearAuto({
-  marca: "toyota",
+  marca: "cheroque",
   modelo: "Rayo",
   año: 2025,
   precio: 32000,
 });
 
-laConcesionaria.actualizarAuto(0, {
+laConcesionaria.actualizarAuto("marca", "toyota", {
   modelo: "Erizo Plus",
   año: 2025,
   precio: 31000,
 });
 
-const autosToyota = laConcesionaria.obtenerAutoPorMarca("toyota");
+//console.log(laConcesionaria);
+laConcesionaria.eliminarAuto("marca", "mazda");
+
 const autosDisponibles = laConcesionaria.obtenerAutos();
-laConcesionaria.actualizarAutoPorModelo("Rayo", { precio: 19500 });
-laConcesionaria.eliminarAutoPorIndice(1);
+const buscarAuto = laConcesionaria.buscarAuto("marca", "toyota");
 
 laConcesionaria.agregarCliente({ nombre: "arcinicuiteco", edad: 45 });
 laConcesionaria.agregarCliente({ nombre: "zinforiano", edad: 51 });
 laConcesionaria.agregarCliente({ nombre: "macumba", edad: 35 });
 
+//console.log(laConcesionaria);
+console.log("------aqui termina-------");
+
+laConcesionaria.actualizarCliente("nombre", "macumba", { edad: 26 });
+const buscarCliente = laConcesionaria.buscarCliente("nombre", "macumba");
+laConcesionaria.eliminarCliente("nombre", "arcinicuiteco");
+
 const clientes = laConcesionaria.obtenerClientes();
-const clientesPorNombre = laConcesionaria.obtenerClientePorNombre("macumba");
-laConcesionaria.actualizarCliente(0, { edad: 26 });
-laConcesionaria.eliminarClientePorIndice(1);
 
 laConcesionaria.agregarVendedor({ nombre: "serafin" });
 laConcesionaria.agregarVendedor({ nombre: "chawi" });
 laConcesionaria.agregarVendedor({ nombre: "maria" });
 
+//console.log(laConcesionaria);
+console.log("------aqui termina-------");
+
+laConcesionaria.actualizarVendedor("nombre", "maria", { nombre: "mario" });
+
+const buscarVendedor = laConcesionaria.buscarVendedor("nombre", "chawi");
+
+laConcesionaria.eliminarVendedor("nombre", "serafin");
 const vendedores = laConcesionaria.obtenerVendedores();
-const vendedorPorNombre = laConcesionaria.obtenerVendedoresPorNombre("chawi")
-laConcesionaria.actualizarVendedor(2,{nombre:"mario"})
-laConcesionaria.eliminarVendedor(0)
 
+laConcesionaria.registrarVenta({
+  cliente: "macumba",
+  auto: "toyota",
+  vendedor: "chawi",
+  precio: 31000,
+});
 
+laConcesionaria.actualizarVenta("cliente", "macumba", { precio: 30500 });
 
+const buscarVenta = laConcesionaria.buscarVenta("cliente", "macumba");
+
+laConcesionaria.eliminarVenta("cliente", "macumba");
+
+laConcesionaria.registrarDevolucion({
+  cliente: "zinforiano",
+  auto: "toyota",
+  fecha: "2024-10-01",
+  motivo: "defecto de fabrica",
+});
+
+laConcesionaria.actualizarDevolucion("cliente", "zinforiano", {
+  motivo: "Cambio de modelo",
+});
+
+const buscarDevolucion = laConcesionaria.buscarDevolucion(
+  "cliente",
+  "zinforiano"
+);
+
+laConcesionaria.crearAdministrador("Jorge");
+laConcesionaria.crearAdministrador("Marta");
+console.log(laConcesionaria.obtenerAdministradores());
+
+laConcesionaria.actualizarAdministrador("nombre", "Marta", {
+  nombre: "Marta Gómez",
+});
+
+laConcesionaria.obtenerAdministradores();
+
+laConcesionaria.eliminarAdministrador("nombre", "Jorge");
+laConcesionaria.obtenerAdministradores();
+console.log(laConcesionaria);
+
+/*
+laConcesionaria.obtenerDevoluciones()
+console.log("------aqui termina-------");
+console.log(buscarDevolucion);
+console.log("------aqui termina-------");
+laConcesionaria.eliminarDevolucion("cliente", "zinforiano");
+console.log("------aqui termina-------");
+console.log(laConcesionaria);*/
+
+/*
+console.log(laConcesionaria.obtenerVentas());
+console.log(buscarVenta);
+console.log(laConcesionaria);
+*/
+
+/*
+//vendedores
+console.log(buscarVendedor);
 console.log("------aqui termina-------");
 console.log(vendedores);
 console.log("------aqui termina-------");
-console.log(vendedorPorNombre);
+console.log(laConcesionaria);
 console.log("------aqui termina-------");
-console.log(clientesPorNombre);
+*/
+
+/*
+//autos
+console.log("------aqui termina-------");
+console.log(autosDisponibles);
+console.log("------aqui termina-------");
+console.log(buscarAuto);
 console.log("------aqui termina-------");
 console.log(clientes);
 console.log("------aqui termina-------");
-console.log(autosToyota);
+console.log(buscarCliente);*/
+/*
+//vendedores
 console.log("------aqui termina-------");
-console.log(autosDisponibles);
+console.log(vendedores);
+console.log("------aqui termina-------");
+console.log(buscarVendedor);
 console.log("------aqui termina------");
-console.log(laConcesionaria);
 console.log("------aqui termina------");
-
-/*const nombreDePropiedad = "nose-estado";
-
-const objeto = {
-  edad: 20,
-  "direccio-usuario": {},
-  [nombreDePropiedad]:"lo que yo quiera"
-
-}
-
-console.log(objeto.edad);
-console.log(objeto["direccio-usuario"]);
-console.log(objeto[nombreDePropiedad]);
-console.log(objeto);*/
+*/
