@@ -35,18 +35,30 @@ laConcesionaria.eliminarAuto("marca", "mazda");
 const autosDisponibles = laConcesionaria.obtenerAutos();
 const buscarAuto = laConcesionaria.buscarAuto("marca", "toyota");
 
+
+//autos
+console.log("------aqui termina-------");
+console.log(autosDisponibles);
+console.log("------aqui termina-------");
+console.log(buscarAuto);
+console.log("------aqui termina-------");
+
+
 laConcesionaria.agregarCliente({ nombre: "arcinicuiteco", edad: 45 });
 laConcesionaria.agregarCliente({ nombre: "zinforiano", edad: 51 });
 laConcesionaria.agregarCliente({ nombre: "macumba", edad: 35 });
 
 //console.log(laConcesionaria);
-console.log("------aqui termina-------");
+//console.log("------aqui termina-------");
 
 laConcesionaria.actualizarCliente("nombre", "macumba", { edad: 26 });
 const buscarCliente = laConcesionaria.buscarCliente("nombre", "macumba");
 laConcesionaria.eliminarCliente("nombre", "arcinicuiteco");
 
-const clientes = laConcesionaria.obtenerClientes();
+/*
+console.log(laConcesionaria.obtenerClientes());
+console.log("------aqui termina-------");
+console.log(buscarCliente);*/
 
 laConcesionaria.agregarVendedor({ nombre: "serafin" });
 laConcesionaria.agregarVendedor({ nombre: "chawi" });
@@ -62,6 +74,17 @@ const buscarVendedor = laConcesionaria.buscarVendedor("nombre", "chawi");
 laConcesionaria.eliminarVendedor("nombre", "serafin");
 const vendedores = laConcesionaria.obtenerVendedores();
 
+/*
+//vendedores
+console.log(buscarVendedor);
+console.log("------aqui termina-------");
+console.log(vendedores);
+console.log("------aqui termina-------");
+console.log(laConcesionaria);
+console.log("------aqui termina-------");
+*/
+
+
 laConcesionaria.registrarVenta({
   cliente: "macumba",
   auto: "toyota",
@@ -74,6 +97,12 @@ laConcesionaria.actualizarVenta("cliente", "macumba", { precio: 30500 });
 const buscarVenta = laConcesionaria.buscarVenta("cliente", "macumba");
 
 laConcesionaria.eliminarVenta("cliente", "macumba");
+
+/*
+console.log(laConcesionaria.obtenerVentas());
+console.log(buscarVenta);
+console.log(laConcesionaria);
+*/
 
 laConcesionaria.registrarDevolucion({
   cliente: "zinforiano",
@@ -91,6 +120,17 @@ const buscarDevolucion = laConcesionaria.buscarDevolucion(
   "zinforiano"
 );
 
+
+/*
+laConcesionaria.obtenerDevoluciones()
+console.log("------aqui termina-------");
+console.log(buscarDevolucion);
+console.log("------aqui termina-------");
+laConcesionaria.eliminarDevolucion("cliente", "zinforiano");
+console.log("------aqui termina-------");
+console.log(laConcesionaria);*/
+
+
 laConcesionaria.crearAdministrador("Jorge");
 laConcesionaria.crearAdministrador("Marta");
 console.log(laConcesionaria.obtenerAdministradores());
@@ -104,48 +144,3 @@ laConcesionaria.obtenerAdministradores();
 laConcesionaria.eliminarAdministrador("nombre", "Jorge");
 laConcesionaria.obtenerAdministradores();
 console.log(laConcesionaria);
-
-/*
-laConcesionaria.obtenerDevoluciones()
-console.log("------aqui termina-------");
-console.log(buscarDevolucion);
-console.log("------aqui termina-------");
-laConcesionaria.eliminarDevolucion("cliente", "zinforiano");
-console.log("------aqui termina-------");
-console.log(laConcesionaria);*/
-
-/*
-console.log(laConcesionaria.obtenerVentas());
-console.log(buscarVenta);
-console.log(laConcesionaria);
-*/
-
-/*
-//vendedores
-console.log(buscarVendedor);
-console.log("------aqui termina-------");
-console.log(vendedores);
-console.log("------aqui termina-------");
-console.log(laConcesionaria);
-console.log("------aqui termina-------");
-*/
-
-/*
-//autos
-console.log("------aqui termina-------");
-console.log(autosDisponibles);
-console.log("------aqui termina-------");
-console.log(buscarAuto);
-console.log("------aqui termina-------");
-console.log(clientes);
-console.log("------aqui termina-------");
-console.log(buscarCliente);*/
-/*
-//vendedores
-console.log("------aqui termina-------");
-console.log(vendedores);
-console.log("------aqui termina-------");
-console.log(buscarVendedor);
-console.log("------aqui termina------");
-console.log("------aqui termina------");
-*/
