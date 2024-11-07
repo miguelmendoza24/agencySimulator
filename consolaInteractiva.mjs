@@ -1,62 +1,131 @@
-import readline from "readline";
+import rl from "./rl-interface.mjs";
 import Concesionaria from "./agenciaAutomotriz.mjs";
 
-
-const rl = readline.createInterface(process.stdin, process.stdout);
 const laConcesionaria = new Concesionaria("Los evomind");
 
-function mostrarMenu() {
+
+function menuPrincipal() {
+  console.log("Menu principal");
+  console.log("1 - Autos");
+  console.log("2 - Clientes");
+  console.log("3 - Vendedores");
+  console.log("4 - Ventas");
+  console.log("5 - devoluciones");
+  console.log("6 - administrador");
+  console.log("0 - Salir");
+
+  rl.question("Opción: ", (input) => {
+    const opcion = parseInt(input);
+
+    if (opcion === 1) {
+      menuAuto();
+    } else if (opcion === 2) {
+      menuCliente();
+    } else if (opcion === 3) {
+      menuVendedores();
+    } else if (opcion === 4) {
+      menuVenta();
+    } else if (opcion === 5) {
+      menuDevoluciones();
+    } else if (opcion === 6) {
+      menuAdministradores();
+    } else {
+      console.log("Opción no válida, intenta de nuevo.");
+      menuPrincipal();
+    }
+  });
+}
+
+function menuAuto() {
   console.log("Seleccione una opcion:");
   console.log("1 - Crear auto");
   console.log("2 - Ver autos disponibles");
-  console.log("3 - Agregar cliente");
-  console.log("4 - Ver clientes registrados");
-  console.log("0 - Salir");
+  console.log("3 - Actualizar auto");
+  console.log("4 - Eliminar autos");
+  console.log("0 - Volver al menu principal");
 
   rl.question("opcion: ", (input) => {
     const opcion = parseInt(input);
 
     if (opcion === 1) {
-      rl.question("Marca del auto: ", (marca) => {
-        rl.question("Modelo del auto: ", (modelo) => {
-          rl.question("Año del auto: ", (año) => {
-            rl.question("Precio del auto: ", (precio) => {
-              const auto = {
-                marca,
-                modelo,
-                año: parseInt(año),
-                precio: parseInt(precio),
-              };
-              laConcesionaria.crearAuto(auto);
-              console.log("Auto creado:", auto);
-              mostrarMenu();
-            });
-          });
-        });
-      });
+      crearAuto();
     } else if (opcion === 2) {
-      const autosDisponibles = laConcesionaria.obtenerAutos();
-      console.log("Autos disponibles: ", autosDisponibles);
-      mostrarMenu();
+      verAutos();
     } else if (opcion === 3) {
-      rl.question("nombre del cliente: ", (nombre) => {
-        rl.question("Edad del cliente: ", (edad) => {
-          laConcesionaria.agregarCliente({ nombre, edad });
-          console.log("cliente agregado:", { nombre, edad });
-          mostrarMenu();
-        });
-      });
+      actualizarAutos();
     } else if (opcion === 4) {
-      const clientes = laConcesionaria.obtenerClientes();
-      console.log("clientes registrados:", clientes);
-      mostrarMenu();
+      eliminarAuto();
     } else if (opcion === 0) {
-      console.log("saliendo...");
-      rl.close();
+      menuPrincipal();
     } else {
-      console.log("Opcion no valida, intenta de nuevo");
-      mostrarMenu();
+      console.log("Opción no válida, intenta de nuevo.");
+      menuVenta();
     }
   });
 }
-mostrarMenu();
+
+function crearAuto() {
+  rl.question("Marca del auto: ", (marca) => {
+    rl.question("Modelo del auto: ", (modelo) => {
+      rl.question("Año del auto: ", (año) => {
+        rl.question("Precio del auto: ", (precio) => {
+          const auto = {
+            marca,
+            modelo,
+            año: parseInt(año),
+            precio: parseInt(precio),
+          };
+          laConcesionaria.crearAuto(auto);
+          console.log("Auto creado:", auto);
+          menuAuto();
+        });
+      });
+    });
+  });
+}
+ 
+function verAutos(){
+  const autosDisponibles = laConcesionaria.obtenerAutos()
+  console.log("Autos disponibles: ", autosDisponibles)
+  mostrarAuto()
+}
+
+function buscarAuto() {
+  
+}
+
+
+menuPrincipal();
+
+
+
+
+
+
+
+
+/*
+funtion () {
+  rl.question("nombre del cliente: ", (nombre) => {
+    rl.question("Edad del cliente: ", (edad) => {
+      laConcesionaria.agregarCliente({ nombre, edad });
+      console.log("cliente agregado:", { nombre, edad });
+      mostrarMenu();
+    });
+  });
+}*/
+
+/*
+  () {
+  const clientes = laConcesionaria.obtenerClientes();
+  console.log("clientes registrados:", clientes);
+  mostrarMenu();
+} else if (opcion === 0) {
+  console.log("saliendo...");
+  rl.close();
+} else {
+  console.log("Opcion no valida, intenta de nuevo");
+  mostrarMenu();
+}
+  });
+}*/
