@@ -1,7 +1,6 @@
 import rl from "./rl-interface.mjs";
-import Concesionaria from "./agenciaAutomotriz.mjs";
-
-const laConcesionaria = new Concesionaria("Los evomind");
+import menuAuto from "./operacionesAuto.mjs";
+import menuCliente from "./operacionesCliente.mjs";
 
 
 function menuPrincipal() {
@@ -29,72 +28,15 @@ function menuPrincipal() {
       menuDevoluciones();
     } else if (opcion === 6) {
       menuAdministradores();
-    } else {
-      console.log("Opción no válida, intenta de nuevo.");
-      menuPrincipal();
-    }
-  });
-}
-
-function menuAuto() {
-  console.log("Seleccione una opcion:");
-  console.log("1 - Crear auto");
-  console.log("2 - Ver autos disponibles");
-  console.log("3 - Actualizar auto");
-  console.log("4 - Eliminar autos");
-  console.log("0 - Volver al menu principal");
-
-  rl.question("opcion: ", (input) => {
-    const opcion = parseInt(input);
-
-    if (opcion === 1) {
-      crearAuto();
-    } else if (opcion === 2) {
-      verAutos();
-    } else if (opcion === 3) {
-      actualizarAutos();
-    } else if (opcion === 4) {
-      eliminarAuto();
     } else if (opcion === 0) {
-      menuPrincipal();
+       console.log("Saliendo...");
+       rl.close();
     } else {
       console.log("Opción no válida, intenta de nuevo.");
-      menuVenta();
+      menuPrincipal();
     }
   });
 }
-
-function crearAuto() {
-  rl.question("Marca del auto: ", (marca) => {
-    rl.question("Modelo del auto: ", (modelo) => {
-      rl.question("Año del auto: ", (año) => {
-        rl.question("Precio del auto: ", (precio) => {
-          const auto = {
-            marca,
-            modelo,
-            año: parseInt(año),
-            precio: parseInt(precio),
-          };
-          laConcesionaria.crearAuto(auto);
-          console.log("Auto creado:", auto);
-          menuAuto();
-        });
-      });
-    });
-  });
-}
- 
-function verAutos(){
-  const autosDisponibles = laConcesionaria.obtenerAutos()
-  console.log("Autos disponibles: ", autosDisponibles)
-  mostrarAuto()
-}
-
-function buscarAuto() {
-  
-}
-
-
 menuPrincipal();
 
 
