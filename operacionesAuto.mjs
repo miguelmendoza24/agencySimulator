@@ -20,7 +20,7 @@ export default function menuAuto() {
     } else if (opcion === 3) {
       buscarAuto();
     } else if (opcion === 4) {
-      actualizarAutos();
+      actualizarAuto();
     } else if (opcion === 5) {
       eliminarAuto();
     } else if (opcion === 0) {
@@ -130,7 +130,3 @@ export function eliminarAuto() {
   );
 }
 
-
-
-
-menuAuto();
