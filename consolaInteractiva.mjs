@@ -1,6 +1,7 @@
 import rl from "./rl-interface.mjs";
 import menuAuto from "./operacionesAuto.mjs";
 import menuCliente from "./operacionesCliente.mjs";
+import menuVendedor from "./operacionesVendedor.mjs";
 
 
 function menuPrincipal() {
@@ -21,7 +22,7 @@ function menuPrincipal() {
     } else if (opcion === 2) {
       menuCliente();
     } else if (opcion === 3) {
-      menuVendedores();
+      menuVendedor();
     } else if (opcion === 4) {
       menuVenta();
     } else if (opcion === 5) {

@@ -31,7 +31,7 @@ export default function menuCliente() {
     }
   });
 }
-function agregarCliente() {
+export function agregarCliente() {
   rl.question("Nombre del cliente: ", (nombre) => {
     rl.question("edad: ", (edad) => {
       const cliente = {
@@ -52,13 +52,13 @@ export function obtenerClientes() {
 }
 
 export function buscarCliente() {
-  rl.question("Ingresa el nombre del cliente a buscar: ", (nombre) => {
+  rl.question("Ingresa el nombre del cliente que desea buscar: ", (nombre) => {
     const cliente = laConcesionaria.buscarCliente("nombre", nombre);
 
     if (cliente) {
       console.log("Cliente encontrado:");
       console.log(
-        `Nombre: ${cliente.nombre}, Teléfono: ${cliente.telefono}, Dirección: ${cliente.direccion}`
+        `Nombre: ${cliente.nombre}`
       );
     } else {
       console.log("No se encontró un cliente con ese nombre.");
@@ -91,18 +91,12 @@ export function actualizarCliente() {
 
 export function eliminarCliente() {
   rl.question(
-    "Ingresa el nombre del cliente que desea eliminar: ",
+    "Ingresa el nombre del cliente que deseas eliminar: ",
     (nombre) => {
-      const clienteEliminado = laConcesionaria.eliminarCliente(
-        "nombre",
-        nombre
-      ); //
-      if (clienteEliminado) {
-        console.log(`Cliente ${nombre} eliminado.`);
-      } else {
-        console.log(`No se encontró un cliente con el nombre ${nombre}.`);
-      }
+      laConcesionaria.eliminarCliente("nombre", nombre);
+      console.log(`El cliente ${nombre} ha sido eliminado.`);
       menuCliente();
     }
   );
 }
+

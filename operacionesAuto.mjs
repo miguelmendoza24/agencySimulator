@@ -32,7 +32,7 @@ export default function menuAuto() {
   });
 }
 
-function crearAuto() {
+export function crearAuto() {
   rl.question("Marca del auto: ", (marca) => {
     rl.question("Modelo del auto: ", (modelo) => {
       rl.question("Año del auto: ", (año) => {
@@ -122,11 +122,12 @@ export function eliminarAuto() {
         `Ingresa el valor de la propiedad ${propiedad}: `,
         (valor) => {
           laConcesionaria.eliminarAuto(propiedad, valor);
-          console.log(`Auto con ${propiedad} ${valor} ha sido eliminado.`);
-          menuAuto(); 
+          console.log(`Auto eliminado.`);
+          menuAuto();
         }
       );
     }
   );
 }
+
 
