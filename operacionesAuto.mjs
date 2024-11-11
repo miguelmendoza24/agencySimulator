@@ -1,5 +1,6 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
+import  menuPrincipal  from "./consolainteractiva.mjs";
 
 export default function menuAuto() {
   console.log("Seleccione una opcion:");
@@ -24,6 +25,7 @@ export default function menuAuto() {
     } else if (opcion === 5) {
       eliminarAuto();
     } else if (opcion === 0) {
+      console.log("Volviendo al menu principal...");
       menuPrincipal();
     } else {
       console.log("Opción no válida, intenta de nuevo.");
@@ -129,5 +131,3 @@ export function eliminarAuto() {
     }
   );
 }
-
-

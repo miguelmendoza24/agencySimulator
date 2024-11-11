@@ -4,7 +4,7 @@ import menuCliente from "./operacionesCliente.mjs";
 import menuVendedor from "./operacionesVendedor.mjs";
 
 
-function menuPrincipal() {
+export default function menuPrincipal() {
   console.log("Menu principal");
   console.log("1 - Autos");
   console.log("2 - Clientes");
@@ -34,41 +34,8 @@ function menuPrincipal() {
        rl.close();
     } else {
       console.log("Opción no válida, intenta de nuevo.");
-      menuPrincipal();
+      menuPrincipal()
     }
   });
 }
 menuPrincipal();
-
-
-
-
-
-
-
-
-/*
-funtion () {
-  rl.question("nombre del cliente: ", (nombre) => {
-    rl.question("Edad del cliente: ", (edad) => {
-      laConcesionaria.agregarCliente({ nombre, edad });
-      console.log("cliente agregado:", { nombre, edad });
-      mostrarMenu();
-    });
-  });
-}*/
-
-/*
-  () {
-  const clientes = laConcesionaria.obtenerClientes();
-  console.log("clientes registrados:", clientes);
-  mostrarMenu();
-} else if (opcion === 0) {
-  console.log("saliendo...");
-  rl.close();
-} else {
-  console.log("Opcion no valida, intenta de nuevo");
-  mostrarMenu();
-}
-  });
-}*/

@@ -1,5 +1,6 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
+import  menuPrincipal  from "./consolainteractiva.mjs";
 
 export default function menuVendedor() {
   console.log("Seleccione una opcion:");
