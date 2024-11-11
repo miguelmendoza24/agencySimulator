@@ -1,6 +1,6 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
-import  menuPrincipal  from "./consolainteractiva.mjs";
+import { volverAlMenuPrincipal } from "./navegacion.mjs";
 
 export default function menuAuto() {
   console.log("Seleccione una opcion:");
@@ -25,8 +25,7 @@ export default function menuAuto() {
     } else if (opcion === 5) {
       eliminarAuto();
     } else if (opcion === 0) {
-      console.log("Volviendo al menu principal...");
-      menuPrincipal();
+      volverAlMenuPrincipal();
     } else {
       console.log("Opción no válida, intenta de nuevo.");
       menuAuto();
@@ -65,7 +64,7 @@ export function buscarAuto() {
     "Ingresa la propiedad por la que deseas buscar (ej. modelo, marca, año, precio): ",
     (propiedad) => {
       rl.question(
-        `Ingresa el valor para la propiedad ${propiedad}: `,
+        `Ingresa el valor de la ${propiedad}: `,
         (valor) => {
           const autoEncontrado = laConcesionaria.buscarAuto(propiedad, valor);
           if (autoEncontrado) {
@@ -99,7 +98,7 @@ export function actualizarAuto() {
               "Ingresa el nuevo valor para esa propiedad: ",
               (nuevoValor) => {
                 const nuevosDatos = {
-                  [propiedad]: nuevoValor,
+                  [propiedad]: nuevoValor
                 };
                 laConcesionaria.actualizarAuto(propiedad, valor, nuevosDatos);
                 console.log("Auto actualizado:", nuevosDatos);
@@ -124,7 +123,7 @@ export function eliminarAuto() {
         `Ingresa el valor de la propiedad ${propiedad}: `,
         (valor) => {
           laConcesionaria.eliminarAuto(propiedad, valor);
-          console.log(`Auto eliminado.`);
+          console.log("Auto eliminado");
           menuAuto();
         }
       );

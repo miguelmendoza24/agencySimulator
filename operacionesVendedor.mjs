@@ -1,6 +1,6 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
-import  menuPrincipal  from "./consolainteractiva.mjs";
+import { volverAlMenuPrincipal } from "./navegacion.mjs";
 
 export default function menuVendedor() {
   console.log("Seleccione una opcion:");
@@ -25,7 +25,7 @@ export default function menuVendedor() {
     } else if (opcion === 5) {
       eliminarVendedor();
     } else if (opcion === 0) {
-      menuPrincipal();
+      volverAlMenuPrincipal()
     } else {
       console.log("Opción no válida, intenta de nuevo.");
       menuVendedor();

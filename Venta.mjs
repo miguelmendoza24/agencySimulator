@@ -3,7 +3,7 @@ export default class Venta {
     this.auto = auto;
     this.cliente = cliente;
     this.vendedor = vendedor;
-    this.precio = precio
+    this.precio = precio;
   }
   actualizar(nuevosDatos) {
     Object.assign(this, nuevosDatos);

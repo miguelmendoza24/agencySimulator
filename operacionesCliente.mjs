@@ -1,6 +1,6 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
-import menuPrincipal from "./consolainteractiva.mjs";
+import { volverAlMenuPrincipal } from "./navegacion.mjs";
 
 export default function menuCliente() {
   console.log("Seleccione una opcion:");
@@ -25,7 +25,7 @@ export default function menuCliente() {
     } else if (opcion === 5) {
       eliminarCliente();
     } else if (opcion === 0) {
-      menuPrincipal();
+      volverAlMenuPrincipal();
     } else {
       console.log("Opción no válida, intenta de nuevo.");
       menuCliente();
