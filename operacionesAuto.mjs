@@ -63,25 +63,21 @@ export function buscarAuto() {
   rl.question(
     "Ingresa la propiedad por la que deseas buscar (ej. modelo, marca, año, precio): ",
     (propiedad) => {
-      rl.question(
-        `Ingresa el valor de la ${propiedad}: `,
-        (valor) => {
-          const autoEncontrado = laConcesionaria.buscarAuto(propiedad, valor);
-          if (autoEncontrado) {
-            console.log("Auto encontrado:");
-            console.log(
-              `${autoEncontrado.marca} ${autoEncontrado.modelo}, Año: ${autoEncontrado.año}, Precio: $${autoEncontrado.precio}`
-            );
-          } else {
-            console.log("No se encontraron autos con esa propiedad y valor.");
-          }
-          menuAuto();
+      rl.question(`Ingresa el valor de la ${propiedad}: `, (valor) => {
+        const autoEncontrado = laConcesionaria.buscarAuto(propiedad, valor);
+        if (autoEncontrado) {
+          console.log("Auto encontrado:");
+          console.log(
+            `${autoEncontrado.marca} ${autoEncontrado.modelo}, Año: ${autoEncontrado.año}, Precio: $${autoEncontrado.precio}`
+          );
+        } else {
+          console.log("No se encontraron autos con esa propiedad y valor.");
         }
-      );
+        menuAuto();
+      });
     }
   );
 }
-
 
 export function actualizarAuto() {
   rl.question(
@@ -98,17 +94,16 @@ export function actualizarAuto() {
               "Ingresa el nuevo valor para esa propiedad: ",
               (nuevoValor) => {
                 const nuevosDatos = {
-                  [propiedad]: nuevoValor
+                  [propiedad]: nuevoValor,
                 };
                 laConcesionaria.actualizarAuto(propiedad, valor, nuevosDatos);
                 console.log("Auto actualizado:", nuevosDatos);
-                menuAuto(); 
               }
             );
           } else {
             console.log("No se encontró un auto con esa propiedad y valor.");
-            menuAuto();
           }
+          menuAuto();
         }
       );
     }

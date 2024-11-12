@@ -56,58 +56,72 @@ export function agregarVenta() {
 export function obtenerVentas() {
   const ventas = laConcesionaria.obtenerVentas();
   console.log("ventas: ", ventas);
-  menuVenta()
+  menuVenta();
 }
 
 export function buscarVenta() {
-  rl.question("Ingresa la propiedad por la que desea buscar (ej. auto, cliente, vendedor, precio)", (propiedad) => {
-    rl.question(`Ingresa el valor de la propiedad   ${propiedad}:`, (valor) => {
-      const ventaEncontrada = laConcesionaria.buscarVenta(propiedad, valor)
-      if (ventaEncontrada) {
-        console.log(
-          `Venta encontrada: Auto: ${ventaEncontrada.auto}, Cliente: ${ventaEncontrada.cliente}, Vendedor: ${ventaEncontrada.vendedor}, Precio: ${ventaEncontrada.precio}`
-        );
-      } else {
-        console.log("No se encontró ninguna venta con estos datos.");
-      }
-      menuVenta()
-    })
-  })
+  rl.question(
+    "Ingresa la propiedad por la que desea buscar (ej. auto, cliente, vendedor, precio)",
+    (propiedad) => {
+      rl.question(
+        `Ingresa el valor de la propiedad   ${propiedad}:`,
+        (valor) => {
+          const ventaEncontrada = laConcesionaria.buscarVenta(propiedad, valor);
+          if (ventaEncontrada) {
+            console.log(
+              `Venta encontrada: Auto: ${ventaEncontrada.auto}, Cliente: ${ventaEncontrada.cliente}, Vendedor: ${ventaEncontrada.vendedor}, Precio: ${ventaEncontrada.precio}`
+            );
+          } else {
+            console.log("No se encontró ninguna venta con estos datos.");
+          }
+          menuVenta();
+        }
+      );
+    }
+  );
 }
-
 
 export function actualizarVenta() {
-  rl.question("Ingresa la propiedad de la venta que deseas actualizar(ej. auto, cliente, vendedor, precio)", (propiedad) => {
-    rl.question(`Ingresa el valor actual de la propiedad ${propiedad}`, (valor) => {
-      const venta = laConcesionaria.buscarVenta(propiedad, valor);
+  rl.question(
+    "Ingresa la propiedad de la venta que deseas actualizar(ej. auto, cliente, vendedor, precio)",
+    (propiedad) => {
+      rl.question(
+        `Ingresa el valor actual de la propiedad ${propiedad}`,
+        (valor) => {
+          const venta = laConcesionaria.buscarVenta(propiedad, valor);
 
-      if (venta) {
-        console.log("venta encontrada:", venta);
-        rl.question("Ingresa el nuevor para esa propiedad: ", (nuevoValor) => {
-          const nuevosDatos = {
-            [propiedad]: nuevoValor
+          if (venta) {
+            console.log("venta encontrada:", venta);
+            rl.question(
+              "Ingresa el nuevor para esa propiedad: ",
+              (nuevoValor) => {
+                const nuevosDatos = {
+                  [propiedad]: nuevoValor,
+                };
+                laConcesionaria.actualizarVenta(propiedad, valor, nuevosDatos);
+                console.log("venta actualizada".nuevosDatos);
+                menuVenta();
+              }
+            );
+          } else {
+            console.log("No se encontro ninguna venta con esos datos");
+            menuVenta();
           }
-          laConcesionaria.actualizarVenta(propiedad, valor, nuevosDatos)
-          console.log("venta actualizada". nuevosDatos);
-          menuVenta()
-        })
-      }
-      else {
-        console.log("No se encontro ninguna venta con esos datos");
-        menuVenta()
-      }
-    })
-  })
+        }
+      );
+    }
+  );
 }
 
-
 export function eliminarVenta() {
-  rl.question("Ingresa la propiedad de la venta que deseas eliminar (ej. auto, cliente, vendedor, precio): ", (propiedad) => {
-    rl.question(`Ingresa el valor de la propiedad ${propiedad}`, (valor) => {
-      laConcesionaria.eliminarVenta(propiedad, valor);
-      console.log("Venta eliminada");
-      menuVenta()
-      
-    })
-  })
+  rl.question(
+    "Ingresa la propiedad de la venta que deseas eliminar (ej. auto, cliente, vendedor, precio): ",
+    (propiedad) => {
+      rl.question(`Ingresa el valor de la propiedad ${propiedad}`, (valor) => {
+        laConcesionaria.eliminarVenta(propiedad, valor);
+        console.log("Venta eliminada");
+        menuVenta();
+      });
+    }
+  );
 }
