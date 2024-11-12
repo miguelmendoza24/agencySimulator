@@ -2,7 +2,9 @@ import rl from "./rl-interface.mjs";
 import menuAuto from "./operacionesAuto.mjs";
 import menuCliente from "./operacionesCliente.mjs";
 import menuVendedor from "./operacionesVendedor.mjs";
-
+import menuVenta from "./operacionesVenta.mjs";
+import menuDevolucion from "./operacionesDevolucion.mjs";
+import menuAdministrador from "./operacionesAdministrador.mjs";
 
 export default function menuPrincipal() {
   console.log("Menu principal");
@@ -26,9 +28,9 @@ export default function menuPrincipal() {
     } else if (opcion === 4) {
       menuVenta();
     } else if (opcion === 5) {
-      menuDevoluciones();
+      menuDevolucion();
     } else if (opcion === 6) {
-      menuAdministradores();
+      menuAdministrador();
     } else if (opcion === 0) {
        console.log("Saliendo...");
        rl.close();
@@ -38,4 +40,3 @@ export default function menuPrincipal() {
     }
   });
 }
-menuPrincipal();
