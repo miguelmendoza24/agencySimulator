@@ -35,9 +35,11 @@ export default function menuAdministrador() {
 
 export function crearAdministrador() {
   rl.question("Nombre del administardor: ", (nombre) => {
-    const administardor = {
-      nombre,
-    };
+    if (!nombre.trim()) {
+      console.log("Error: El nombre del administrador no puede estar vacío.");
+      return crearAdministrador()
+    }
+    const administardor = { nombre };
     laConcesionaria.crearAdministrador(administardor);
     console.log("administrador registrado:", administardor);
     menuAdministrador();
@@ -46,14 +48,27 @@ export function crearAdministrador() {
 
 export function verAdministradores() {
   const administradoresDisponibles = laConcesionaria.obtenerAdministradores();
-  console.log("Administradores disponibles: ", administradoresDisponibles);
+
+  if (administradoresDisponibles.length === 0) {
+    console.log("No hay administradores disponibles.");
+  } else {
+    console.log("Administradores disponibles:");
+    administradoresDisponibles.forEach((administardor, index) => {
+      console.log(`${index + 1}. Nombre: ${administardor.nombre}`);
+    })
+  }
   menuAdministrador();
 }
+
 
 export function buscarAdministradores() {
   rl.question(
     "Ingresa el nombre del administrador que deseas buscar: ",
     (nombre) => {
+      if (!nombre.trim()) {
+        console.log("Error: El nombre del administrador no puede estar vacio.");
+        return buscarAdministradores()
+      }
       const administrador = laConcesionaria.buscarAdministrador(
         "nombre",
         nombre
@@ -73,10 +88,22 @@ export function actualizarAdministrador() {
   rl.question(
     "Ingresa el nombre del administrador que desea actualizar: ",
     (nombre) => {
+      if (!nombre.trim()) {
+        console.log("Error: El nombre del administrador no puede estar vacio");
+        return actualizarAdministrador();
+      }
+      const administardor = laConcesionaria.buscarAdministrador("nombre", nombre);
+      if (!administardor) {
+        console.log("No se encontro un administrador con ese nombre.");
+        return menuAdministrador();
+      }
+
       rl.question("Nuevo nombre del administrdor: ", (nuevoNombre) => {
-        const nuevosDatos = {
-          nombre,
-        };
+        if (!nuevoNombre.trim()) {
+          console.log("Error: El nuevo nombre del administrador no puede estar vacio");
+          return actualizarAdministrador()
+        }
+        const nuevosDatos = { nombre: nuevoNombre };
         laConcesionaria.actualizarAdministrador("nombre", nombre, nuevosDatos);
         console.log(`Administrador actualizado: ${nuevoNombre}`);
         menuAdministrador();
@@ -89,8 +116,17 @@ export function eliminarAdministrador() {
   rl.question(
     "Ingresa el nombre del administrador que deseas eliminar: ",
     (nombre) => {
-      laConcesionaria.eliminarAdministrador("nombre", nombre);
-      console.log(`El administardor ${nombre} ha sido eliminado.`);
+      if (!nombre.trim()) {
+        console.log("Error: El nombre del administrador no puede estar vacio.");
+        return eliminarAdministrador();
+      }
+      const administrador = laConcesionaria.buscarAdministrador("nombre", nombre);
+      if (!administrador) {
+        console.log("No se encontro un administrador con ese nombre.");
+      } else {
+        laConcesionaria.eliminarAdministrador("nombre", nombre);
+        console.log(`El administardor ${nombre} ha sido eliminado.`);
+      }
       menuAdministrador();
     }
   );
