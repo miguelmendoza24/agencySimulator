@@ -57,10 +57,7 @@ export function buscarCliente() {
     const cliente = laConcesionaria.buscarCliente("nombre", nombre);
 
     if (cliente) {
-      console.log("Cliente encontrado:");
-      console.log(
-        `Nombre: ${cliente.nombre}`
-      );
+      console.log("Cliente encontrado: ", cliente);
     } else {
       console.log("No se encontró un cliente con ese nombre.");
     }
@@ -75,10 +72,9 @@ export function actualizarCliente() {
       rl.question("Nuevo nombre del cliente: ", (nuevoNombre) => {
         rl.question("Nueva edad del cliente: ", (nuevaEdad) => {
           const nuevosDatos = {
-            nombre: nuevoNombre,
-            edad: parseInt(nuevaEdad),
+            nombre,
+            edad: parseInt(nuevaEdad)
           };
-
           laConcesionaria.actualizarCliente("nombre", nombre, nuevosDatos);
           console.log(
             `Cliente actualizado: ${nuevoNombre}, Edad: ${nuevaEdad}`
