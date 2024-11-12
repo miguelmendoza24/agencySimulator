@@ -34,11 +34,18 @@ export default function menuCliente() {
 }
 export function agregarCliente() {
   rl.question("Nombre del cliente: ", (nombre) => {
-    rl.question("edad: ", (edad) => {
-      const cliente = {
-        nombre,
-        edad,
-      };
+    if (!nombre.trim()) {
+      console.log("error: El nombre del cliente no puede estar vacio. ");
+      return agregarCliente()
+    }
+    rl.question("Edad: ", (edad) => {
+      const edadNum = parseInt(edad)
+      if (isNaN(edadNum) || edadNum <= 0) {
+        console.log("Error: La edad debe ser un numero positivo");
+        return agregarCliente()
+      }
+
+      const cliente = { nombre, edad, edadNum };
       laConcesionaria.agregarCliente(cliente);
       console.log("Cliente agregado:", cliente);
       menuCliente();
@@ -48,12 +55,22 @@ export function agregarCliente() {
 
 export function obtenerClientes() {
   const clientesDisponibles = laConcesionaria.obtenerClientes();
-  console.log("Autos disponibles: ", clientesDisponibles);
+  if (clientesDisponibles.length === 0) {
+    console.log("No hay clientes disponibles.");
+  } else {
+    console.log("Autos disponibles:");
+    clientesDisponibles.forEach((cliente, index) =>)
+    console.log(`${index + 1}. Nombre: ${cliente.nombre}, Edad: ${cliente.edad}`);
+  }
   menuCliente();
 }
 
 export function buscarCliente() {
   rl.question("Ingresa el nombre del cliente que desea buscar: ", (nombre) => {
+    if (!nombre.trim()) {
+      console.log("Error: El nombre del cliente no puede estar vacío.");
+      return buscarCliente()
+    }
     const cliente = laConcesionaria.buscarCliente("nombre", nombre);
 
     if (cliente) {
@@ -69,15 +86,35 @@ export function actualizarCliente() {
   rl.question(
     "Ingresa el nombre del cliente que desea actualizar: ",
     (nombre) => {
+      if (!nombre.trim()) {
+        console.log("Error: El nombre del cliente no puede estar vacío.");
+        return actualizarCliente()
+      }
+      const clienteExistente = laConcesionaria.buscarCliente("nombre", nombre);
+      if (!clienteExistente) {
+        console.log("No se encontró un cliente con ese nombre.");
+        return menuCliente();
+      }
+      
       rl.question("Nuevo nombre del cliente: ", (nuevoNombre) => {
+        if (!nuevoNombre.trim()) {
+          console.log(
+            "Error: El nuevo nombre del cliente no puede estar vacío."
+          );
+          return actualizarCliente();
+        }
+
         rl.question("Nueva edad del cliente: ", (nuevaEdad) => {
-          const nuevosDatos = {
-            nombre,
-            edad: parseInt(nuevaEdad)
+          const nuevaEdadNum = parseInt(nuevaEdad)
+          if (isNaN(nuevaEdadNum) || nuevaEdadNum <= 0) {
+            console.log("Error: La edad debe ser un número positivo.");
+            return actualizarCliente();
+          }
+          const nuevosDatos = { nombre, edad: parseInt(nuevaEdad)
           };
           laConcesionaria.actualizarCliente("nombre", nombre, nuevosDatos);
           console.log(
-            `Cliente actualizado: ${nuevoNombre}, Edad: ${nuevaEdad}`
+            `Cliente actualizado: Nombre: ${nuevoNombre}, Edad: ${nuevaEdad}`
           );
           menuCliente();
         });
@@ -90,8 +127,17 @@ export function eliminarCliente() {
   rl.question(
     "Ingresa el nombre del cliente que deseas eliminar: ",
     (nombre) => {
-      laConcesionaria.eliminarCliente("nombre", nombre);
-      console.log(`El cliente ${nombre} ha sido eliminado.`);
+      if (!nombre.trim()) {
+        console.log("Error: El nombre del cliente no puede estar vacio.");
+        return eliminarCliente()
+      }
+      const clienteExistente = laConcesionaria.buscarCliente("nombre", nombre);
+      if (!clienteExistente) {
+        console.log("No se encontró un cliente con ese nombre.");
+      } else {
+        laConcesionaria.eliminarCliente("nombre", nombre);
+        console.log(`El cliente ${nombre} ha sido eliminado.`);
+      }
       menuCliente();
     }
   );
