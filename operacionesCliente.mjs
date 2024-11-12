@@ -59,8 +59,9 @@ export function obtenerClientes() {
     console.log("No hay clientes disponibles.");
   } else {
     console.log("Autos disponibles:");
-    clientesDisponibles.forEach((cliente, index) =>)
-    console.log(`${index + 1}. Nombre: ${cliente.nombre}, Edad: ${cliente.edad}`);
+    clientesDisponibles.forEach((cliente, index) => {
+      console.log(`${index + 1}. Nombre: ${cliente.nombre}, Edad: ${cliente.edad}`);
+    })
   }
   menuCliente();
 }
