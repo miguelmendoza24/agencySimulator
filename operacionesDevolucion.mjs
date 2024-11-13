@@ -35,9 +35,30 @@ export default function menuDevolucion() {
 
 export function registrarDevolucion() {
   rl.question("Nombre del cliente: ", (cliente) => {
+    if (!clearInterval.trim()) {
+      console.log("Error: El nombre no puede estar vacio.");
+      return registrarDevolucion();
+    }
+
     rl.question("Auto: ", (auto) => {
+      if (!auto.trim()) {
+        console.log("Error: El nombre del auto no puede estar vacio.");
+        return registrarDevolucion();
+      }
+
       rl.question("Fecha: ", (fecha) => {
+        const fechaRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (!fechaRegex.test(fecha)) {
+          console.log("Error: La fecha debe tener el formato DD/MM/AAAA.");
+          return registrarDevolucion();
+        }
         rl.question("Motivo de la devolucion: ", (motivo) => {
+          if (!motivo) {
+            console.log(
+              "Error: El motivo de la devolución no puede estar vacío."
+            );
+            return registrarDevolucion();
+          }
           const devolucion = {
             cliente,
             auto,
@@ -55,70 +76,90 @@ export function registrarDevolucion() {
 
 export function obtenerDevoluciones() {
   const devoluciones = laConcesionaria.obtenerDevoluciones();
-  console.log("devoluciones: ", devoluciones);
+  if (devoluciones.length === 0) {
+    console.log("No hay devoluciones registradas.");
+  } else {
+    console.log("Devoluciones registradas:");
+    devoluciones.forEach((devolucion, index) => {
+      console.log(
+        `${index + 1}. Cliente: ${devolucion.cliente}, Auto: ${
+          devolucion.auto
+        }, Fecha: ${devolucion.fecha}, Motivo: ${devolucion.motivo}`
+      );
+    });
+  }
   menuDevolucion();
 }
 
 export function buscarDevolucion() {
   rl.question(
-    "Ingresa la propiedad por la que deseas buscar (ej. cliente, auto, fecha, motivo): ",
-    (propiedad) => {
-      rl.question(`Ingresa el valor de la ${propiedad}: `, (valor) => {
-        const devolucionEncontrada = laConcesionaria.buscarDevolucion(propiedad, valor);
-        if (devolucionEncontrada) {
-          console.log("devolucion encontrada", devolucionEncontrada)
-        } else {
-          console.log("No se encontraron autos con esa propiedad y valor.");
-        }
-        menuDevolucion();
-      });
+    "Ingresa el nombre del cliente para buscar la devolución: ",
+    (cliente) => {
+      if (!cliente.trim()) {
+        console.log("Error: El nombre del cliente no puede estar vacío.");
+        return buscarDevolucion();
+      }
+
+      const devolucion = laConcesionaria.buscarDevolucion("cliente", cliente);
+      if (devolucion) {
+        console.log("Devolución encontrada:", devolucion);
+      } else {
+        console.log("No se encontró una devolución para ese cliente.");
+      }
+      menuDevolucion();
     }
   );
 }
 
 export function actualizarDevolucion() {
   rl.question(
-    "Ingresa la propiedad de la devolucion que deseas actualizar (ej. cliente, auto, fecha, motivo): ",
-    (propiedad) => {
-      rl.question(
-        `Ingresa el valor actual de la propiedad ${propiedad}: `,
-        (valor) => {
-          const devolucion = laConcesionaria.buscarDevolucion(propiedad, valor);
+    "Ingresa el nombre del cliente cuya devolución deseas actualizar: ",
+    (cliente) => {
+      if (!cliente.trim()) {
+        console.log("Error: El nombre del cliente no puede estar vacío.");
+        return actualizarDevolucion();
+      }
 
-          if (devolucion) {
-            console.log("Devolucion encontrada:", devolucion);
-            rl.question(
-              "Ingresa el nuevo valor para esa propiedad: ",
-              (nuevoValor) => {
-                const nuevosDatos = {
-                  [propiedad]: nuevoValor,
-                };
-                laConcesionaria.actualizarDevolucion(propiedad, valor, nuevosDatos);
-                console.log("Devolucion actualizada:", nuevosDatos);
-              }
-            );
-          } else {
-            console.log("No se encontró un auto con esa propiedad y valor.");
-            menuDevolucion();
-          }
+      const devolucion = laConcesionaria.buscarDevolucion("cliente", cliente);
+      if (!devolucion) {
+        console.log("No se encontró una devolución para ese cliente.");
+        return menuDevolucion();
+      }
+
+      rl.question("Nuevo motivo de la devolución: ", (nuevoMotivo) => {
+        if (!nuevoMotivo.trim()) {
+          console.log(
+            "Error: El motivo de la devolución no puede estar vacío."
+          );
+          return actualizarDevolucion();
         }
-      );
+
+        laConcesionaria.actualizarDevolucion("cliente", cliente, {
+          motivo: nuevoMotivo,
+        });
+        console.log(`Devolución actualizada para el cliente ${cliente}.`);
+        menuDevolucion();
+      });
     }
   );
 }
 
 export function eliminarDevolucion() {
   rl.question(
-    "Ingresa la propiedad de la devolucion que deseas eliminar (ej. cliente, auto, fecha, motivo): ",
-    (propiedad) => {
-      rl.question(
-        `Ingresa el valor de la propiedad ${propiedad}: `,
-        (valor) => {
-          laConcesionaria.eliminarDevolucion(propiedad, valor);
-          console.log("Devolucion eliminada");
-          menuDevolucion();
-        }
-      );
+    "Ingresa el nombre del cliente cuya devolución deseas eliminar: ",
+    (cliente) => {
+      if (!cliente.trim()) {
+        console.log("Error: El nombre del cliente no puede estar vacío.");
+        return eliminarDevolucion();
+      }
+      const devolucion = laConcesionaria.buscarDevolucion("cliente", cliente);
+      if (!devolucion) {
+        console.log("No se encontró una devolución para ese cliente.");
+      } else {
+        laConcesionaria.eliminarDevolucion("cliente", cliente);
+        console.log(`Devolucion eliminada para el cliente ${cliente}.`);
+      }
+      menuDevolucion();
     }
   );
 }
