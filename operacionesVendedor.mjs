@@ -35,9 +35,12 @@ export default function menuVendedor() {
 
 export function agregarVendedor() {
   rl.question("Nombre del vendedor", (nombre) => {
-    const vendedor = {
-      nombre,
-    };
+    if (!nombre.trim()) {
+      console.log("Error: El nombre del vendedor no puede estar vacío.");
+      return agregarVendedor();
+    }
+
+    const vendedor = { nombre };
     laConcesionaria.agregarVendedor(vendedor);
     console.log("Vendedor agregado", vendedor);
     menuVendedor();
@@ -46,12 +49,22 @@ export function agregarVendedor() {
 
 export function obtenerVendedores() {
   const vendedoresDisponibles = laConcesionaria.obtenerVendedores();
-  console.log("vendedores disponibles", vendedoresDisponibles);
+  if (vendedoresDisponibles.length === 0) {
+    console.log("No hay vendedores registrados.");
+  }
+  console.log("vendedores disponibles:");
+  vendedoresDisponibles.forEach((vendedor, index) => {
+    console.log(`${index + 1}. Nombre: ${vendedor.nombre}`);
+  })
   menuVendedor();
 }
 
 export function buscarVendedor() {
   rl.question("Ingresa el nombre del vendedor que desea buscar", (nombre) => {
+    if (!nombre.trim()) {
+       console.log("Error: El nombre del vendedor no puede estar vacío.");
+       return buscarVendedor();
+    }
     const vendedor = laConcesionaria.buscarVendedor("nombre", nombre);
     if (vendedor) {
       console.log("Vendedor encontrado:");
@@ -66,10 +79,17 @@ export function buscarVendedor() {
 
 export function actualizarVendedor() {
   rl.question("Ingresa el nombre del vendedor que desa actualizar", (nombre) => {
+    if (!nombre.trim()) {
+      console.log("Error: El nombre del vendedor no puede estar vacío.");
+      return actualizarVendedor();
+    }
     rl.question("Nuevo nombre del vendedor", (nuevoNombre) => {
-      const nuevosDatos = {
-        nombre: nuevoNombre
+      if (!nuevoNombre.trim()) {
+        console.log("Error: El nuevo nombre no puede estar vacío.");
+        return actualizarVendedor();
       }
+
+      const nuevosDatos = { nombre: nuevoNombre }
       laConcesionaria.actualizarVendedor("nombre", nombre, nuevosDatos);
       console.log(`Vendedor actualizado: ${nuevoNombre}`);
       menuVendedor()
@@ -79,6 +99,10 @@ export function actualizarVendedor() {
 
 export function eliminarVendedor() {
   rl.question("Ingresa el nombre del vendedor que desea eliminar: ", (nombre) => {
+    if (!nombre.trim()) {
+      console.log("Error: El nombre del vendedor no puede estar vacío.");
+      return eliminarVendedor();
+    }
     laConcesionaria.eliminarVendedor("nombre", nombre);
     console.log(`El vendedor ${nombre} ha sido eliminado`);
     menuVendedor()
