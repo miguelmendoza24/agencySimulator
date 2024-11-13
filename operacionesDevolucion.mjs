@@ -53,7 +53,7 @@ export function registrarDevolucion() {
           return registrarDevolucion();
         }
         rl.question("Motivo de la devolucion: ", (motivo) => {
-          if (!motivo) {
+          if (!motivo.trim()) {
             console.log(
               "Error: El motivo de la devolución no puede estar vacío."
             );
