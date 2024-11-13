@@ -35,14 +35,33 @@ export default function menuVenta() {
 
 export function agregarVenta() {
   rl.question("Modelo del auto: ", (modelo) => {
+    if (!modelo) {
+      console.log("El modelo no puede estar vacío.");
+      return agregarVenta();
+    }
+
     rl.question("Nombre del cliente: ", (nombreCliente) => {
+      if (!nombreCliente) {
+        console.log("El nombre del cliente no puede estar vacío.");
+        return agregarVenta();
+      }
+
       rl.question("Nombre del vendedor: ", (nombreVendedor) => {
+        if (!nombreVendedor) {
+          console.log("El nombre del vendedor no puede estar vacío.");
+          return agregarVenta();
+        }
         rl.question("Precio del auto: ", (precio) => {
+          const precioNum = parseInt(precio)
+          if (isNaN(precioNum) || precioNum <= 0) {
+            console.log("El precio debe ser un número positivo.");
+            return agregarVenta();
+          }
           const venta = {
             modelo,
             nombreCliente,
             nombreVendedor,
-            precio: parseInt(precio),
+            precio: precioNum,
           };
           laConcesionaria.agregarVenta(venta);
           console.log("Venta registrada: ", venta);
@@ -55,7 +74,18 @@ export function agregarVenta() {
 
 export function obtenerVentas() {
   const ventas = laConcesionaria.obtenerVentas();
-  console.log("ventas: ", ventas);
+  if (ventas.length === 0) {
+     console.log("No hay ventas registradas.");
+  } else {
+    console.log("Ventas registradas:");
+    ventas.forEach((venta, index) => {
+      console.log(
+        `${index + 1}. Auto: ${venta.modelo}, Cliente: ${
+          venta.nombreCliente
+        }, Vendedor: ${venta.nombreVendedor}, Precio: ${venta.precio}`
+      );
+    });
+  }
   menuVenta();
 }
 
@@ -63,9 +93,23 @@ export function buscarVenta() {
   rl.question(
     "Ingresa la propiedad por la que desea buscar (ej. auto, cliente, vendedor, precio)",
     (propiedad) => {
+      const validarPropiedad = [
+        "modelo",
+        "nombreCliente",
+        "nombreVendedor",
+        "precio",
+      ];
+      if (!validarPropiedad.includes(propiedad)) {
+         console.log("Propiedad no válida. Intenta de nuevo.");
+         return buscarVenta();
+      }
       rl.question(
         `Ingresa el valor de la propiedad   ${propiedad}:`,
         (valor) => {
+          if (!valor) {
+            console.log("El valor no puede estar vacío.");
+            return buscarVenta();
+          }
           const ventaEncontrada = laConcesionaria.buscarVenta(propiedad, valor);
           if (ventaEncontrada) {
             console.log(
@@ -85,9 +129,23 @@ export function actualizarVenta() {
   rl.question(
     "Ingresa la propiedad de la venta que deseas actualizar(ej. auto, cliente, vendedor, precio)",
     (propiedad) => {
+      const validarPropiedad = [
+        "modelo",
+        "nombreCliente",
+        "nombreVendedor",
+        "precio",
+      ];
+      if (!validarPropiedad.includes(propiedad)) {
+        console.log("Propiedad no válida. Intenta de nuevo.");
+        return actualizarVenta();
+      }
       rl.question(
         `Ingresa el valor actual de la propiedad ${propiedad}`,
         (valor) => {
+          if (!valor) {
+             console.log("El valor no puede estar vacío.");
+             return actualizarVenta();
+          }
           const venta = laConcesionaria.buscarVenta(propiedad, valor);
 
           if (venta) {
@@ -95,6 +153,10 @@ export function actualizarVenta() {
             rl.question(
               "Ingresa el nuevor para esa propiedad: ",
               (nuevoValor) => {
+                if (!nuevoValor) {
+                   console.log("El nuevo valor no puede estar vacío.");
+                   return actualizarVenta();
+                }
                 const nuevosDatos = {
                   [propiedad]: nuevoValor,
                 };
@@ -115,13 +177,37 @@ export function actualizarVenta() {
 
 export function eliminarVenta() {
   rl.question(
-    "Ingresa la propiedad de la venta que deseas eliminar (ej. auto, cliente, vendedor, precio): ",
+    "Ingresa la propiedad de la venta que deseas eliminar (ej. modelo, nombreCliente, nombreVendedor, precio): ",
     (propiedad) => {
-      rl.question(`Ingresa el valor de la propiedad ${propiedad}`, (valor) => {
-        laConcesionaria.eliminarVenta(propiedad, valor);
-        console.log("Venta eliminada");
-        menuVenta();
-      });
+      const validProps = [
+        "modelo",
+        "nombreCliente",
+        "nombreVendedor",
+        "precio",
+      ];
+      if (!validProps.includes(propiedad)) {
+        console.log("Propiedad no válida. Intenta de nuevo.");
+        return eliminarVenta();
+      }
+
+      rl.question(
+        `Ingresa el valor de la propiedad ${propiedad}: `,
+        (valor) => {
+          if (!valor) {
+            console.log("El valor no puede estar vacío.");
+            return eliminarVenta();
+          }
+
+          const venta = laConcesionaria.buscarVenta(propiedad, valor);
+          if (venta) {
+            laConcesionaria.eliminarVenta(propiedad, valor);
+            console.log("Venta eliminada.");
+          } else {
+            console.log("No se encontró ninguna venta con estos datos.");
+          }
+          menuVenta();
+        }
+      );
     }
   );
 }
