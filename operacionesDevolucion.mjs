@@ -35,7 +35,7 @@ export default function menuDevolucion() {
 
 export function registrarDevolucion() {
   rl.question("Nombre del cliente: ", (cliente) => {
-    if (!clearInterval.trim()) {
+    if (!cliente.trim()) {
       console.log("Error: El nombre no puede estar vacio.");
       return registrarDevolucion();
     }
@@ -126,20 +126,38 @@ export function actualizarDevolucion() {
         return menuDevolucion();
       }
 
-      rl.question("Nuevo motivo de la devolución: ", (nuevoMotivo) => {
-        if (!nuevoMotivo.trim()) {
-          console.log(
-            "Error: El motivo de la devolución no puede estar vacío."
-          );
-          return actualizarDevolucion();
-        }
+      rl.question(
+        "Ingresa la propiedad que deseas actualizar(ej, cliente, auto, fecha, motivo): ",
+        (propiedad) => {
+          const propiedadesValidas = ["cliente", "auto", "fecha", "motivo"];
+          if (!propiedadesValidas.includes(propiedad)) {
+            console.log("propiedad no valida. Intenta de nuevo.");
+            return actualizarDevolucion();
+          }
+          rl.question(
+            `Nuevo valor para la propiedad ${propiedad}: `,
+            (nuevoValor) => {
+              if (!nuevoValor.trim()) {
+                console.log(
+                  `Error: El valor de ${propiedad} no puede estar vacío.`
+                );
+                return actualizarDevolucion();
+              }
+              const nuevosDatos = {
+                [propiedad]: nuevoValor,
+              };
 
-        laConcesionaria.actualizarDevolucion("cliente", cliente, {
-          motivo: nuevoMotivo,
-        });
-        console.log(`Devolución actualizada para el cliente ${cliente}.`);
-        menuDevolucion();
-      });
+              laConcesionaria.actualizarDevolucion(
+                "cliente",
+                cliente,
+                nuevosDatos
+              );
+              console.log(`Drvolucion de ${cliente} actualizada`);
+              menuDevolucion();
+            }
+          );
+        }
+      );
     }
   );
 }
