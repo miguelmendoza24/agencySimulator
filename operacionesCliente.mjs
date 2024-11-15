@@ -45,7 +45,7 @@ export function agregarCliente() {
         return agregarCliente()
       }
 
-      const cliente = { nombre, edad, edadNum };
+      const cliente = { nombre, edad };
       laConcesionaria.agregarCliente(cliente);
       console.log("Cliente agregado:", cliente);
       menuCliente();
@@ -104,14 +104,13 @@ export function actualizarCliente() {
           );
           return actualizarCliente();
         }
-
         rl.question("Nueva edad del cliente: ", (nuevaEdad) => {
-          const nuevaEdadNum = parseInt(nuevaEdad)
+          const nuevaEdadNum = parseInt(nuevaEdad, 10)
           if (isNaN(nuevaEdadNum) || nuevaEdadNum <= 0) {
             console.log("Error: La edad debe ser un número positivo.");
             return actualizarCliente();
           }
-          const nuevosDatos = { nombre, edad: parseInt(nuevaEdad)
+          const nuevosDatos = { nombre: nuevoNombre, edad: parseInt(nuevaEdad)
           };
           laConcesionaria.actualizarCliente("nombre", nombre, nuevosDatos);
           console.log(
