@@ -1,7 +1,6 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
 import { volverAlMenuPrincipal } from "./navegacion.mjs";
-import Administrador from "./Administrador.mjs";
 
 export default function menuAdministrador() {
   console.log("Seleccione una opcion:");
