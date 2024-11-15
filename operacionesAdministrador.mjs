@@ -1,6 +1,7 @@
 import rl from "./rl-interface.mjs";
 import laConcesionaria from "./concesionaria-instancia.mjs";
 import { volverAlMenuPrincipal } from "./navegacion.mjs";
+import Administrador from "./Administrador.mjs";
 
 export default function menuAdministrador() {
   console.log("Seleccione una opcion:");
@@ -19,7 +20,7 @@ export default function menuAdministrador() {
     } else if (opcion === 2) {
       verAdministradores();
     } else if (opcion === 3) {
-      buscarAdministradores();
+      buscarAdministrador();
     } else if (opcion === 4) {
       actualizarAdministrador();
     } else if (opcion === 5) {
@@ -38,36 +39,35 @@ export function crearAdministrador() {
     if (!nombre.trim()) {
       console.log("Error: El nombre del administrador no puede estar vacío.");
       return crearAdministrador()
-    }
-    const administardor = { nombre };
-    laConcesionaria.crearAdministrador(administardor);
-    console.log("administrador registrado:", administardor);
+    };
+    laConcesionaria.crearAdministrador(nombre);
+    console.log("administrador registrado:", nombre);
     menuAdministrador();
   });
 }
 
 export function verAdministradores() {
   const administradoresDisponibles = laConcesionaria.obtenerAdministradores();
-
   if (administradoresDisponibles.length === 0) {
     console.log("No hay administradores disponibles.");
   } else {
     console.log("Administradores disponibles:");
-    administradoresDisponibles.forEach((administardor, index) => {
-      console.log(`${index + 1}. Nombre: ${administardor.nombre}`);
-    })
+    administradoresDisponibles.forEach((admin, index) => {
+      console.log(`${index + 1}. ${admin.nombre}`);
+    });
   }
   menuAdministrador();
 }
 
 
-export function buscarAdministradores() {
+
+export function buscarAdministrador() {
   rl.question(
     "Ingresa el nombre del administrador que deseas buscar: ",
     (nombre) => {
       if (!nombre.trim()) {
         console.log("Error: El nombre del administrador no puede estar vacio.");
-        return buscarAdministradores()
+        return buscarAdministrador()
       }
       const administrador = laConcesionaria.buscarAdministrador(
         "nombre",
@@ -98,7 +98,7 @@ export function actualizarAdministrador() {
         return menuAdministrador();
       }
 
-      rl.question("Nuevo nombre del administrdor: ", (nuevoNombre) => {
+      rl.question("Nuevo nombre del administrador: ", (nuevoNombre) => {
         if (!nuevoNombre.trim()) {
           console.log("Error: El nuevo nombre del administrador no puede estar vacio");
           return actualizarAdministrador()
