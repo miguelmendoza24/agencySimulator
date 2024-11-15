@@ -27,20 +27,41 @@ export default class Concesionaria {
   }
   //leer
   buscarAuto(propiedad, valor) {
-    return this.autos.find((auto) => auto[propiedad] === valor);
+    return this.autos.find((auto) => {
+      const propiedadValor = auto[propiedad];
+      return String(propiedadValor) === String(valor);
+    });
   }
 
   //actualizar
   actualizarAuto(propiedad, valor, nuevosDatos) {
-    const auto = this.buscarAuto(propiedad, valor)
-    if (auto) {
-      auto.actualizar(nuevosDatos);
+    const autoActualizado = Auto.actualizarAutoPorPropiedad(
+      this.autos,
+      propiedad,
+      valor,
+      nuevosDatos
+    );
+    if (autoActualizado) {
+      console.log("Auto actualizado:", autoActualizado);
+    } else {
+      console.log("No se encontró un auto con esa propiedad y valor.");
     }
   }
 
   //borrar
   eliminarAuto(propiedad, valor) {
-    this.autos = this.autos.filter((auto) => auto[propiedad] !== valor);
+    const autoIndex = Auto.buscarIndicePorPropiedad(
+      this.autos,
+      propiedad,
+      valor
+    );
+    if (autoIndex === -1) {
+      console.log("No se encontro un auto con esa propiedad y valor");
+      return;
+    }
+    this.autos.splice(autoIndex, 1);
+    console.log("Auto eliminado");
+    console.log(this.autos);
   }
 
   //clase cliente crud
@@ -60,7 +81,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarCliente(propiedad, valor, nuevosDatos) {
-    const cliente = this.buscarCliente(propiedad, valor)
+    const cliente = this.buscarCliente(propiedad, valor);
     if (cliente) {
       cliente.actualizar(nuevosDatos);
     }
@@ -91,7 +112,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarVendedor(propiedad, valor, nuevosDatos) {
-    const vendedor = this.buscarVendedor(propiedad, valor)
+    const vendedor = this.buscarVendedor(propiedad, valor);
     if (vendedor) {
       vendedor.actualizar(nuevosDatos);
     }
@@ -120,7 +141,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarVenta(propiedad, valor, nuevosDatos) {
-    const venta = this.buscarVenta(propiedad, valor)
+    const venta = this.buscarVenta(propiedad, valor);
     if (venta) {
       venta.actualizar(nuevosDatos);
     }
@@ -142,7 +163,9 @@ export default class Concesionaria {
   }
   //leer
   buscarDevolucion(propiedad, valor) {
-    return this.devoluciones.find((devolucion) => devolucion[propiedad] === valor);
+    return this.devoluciones.find(
+      (devolucion) => devolucion[propiedad] === valor
+    );
   }
   //actualizar
   actualizarDevolucion(propiedad, valor, nuevosDatos) {
@@ -176,7 +199,7 @@ export default class Concesionaria {
   }
   //actualizar
   actualizarAdministrador(propiedad, valor, nuevosDatos) {
-    const administrador = this.buscarAdministrador(propiedad, valor)
+    const administrador = this.buscarAdministrador(propiedad, valor);
     if (administrador) {
       administrador.actualizar(nuevosDatos);
     }
